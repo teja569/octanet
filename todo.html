@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Add opacity to make text more readable */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-style: oblique;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 30px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task {
+            flex-grow: 1;
+        }
+
+        .delete {
+            color: #f00;
+            cursor: pointer;
+        }
+
+        .delete:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            margin-bottom: 60px;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .menu-bar {
+            background-color: #333;
+            color: #fff;
+            width: 50px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-icon {
+            width: 20px;
+            height: 2px;
+            background-color: #fff;
+            margin: 2px 0;
+        }
+
+        .input-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .arrow {
+            position: absolute;
+            right: 15px;
+            transform: translateY(-50%);
+            font-size: 15px;
+            color: #000000;
+            background: #cccccc;
+            border-radius: 50px;
+            padding: 1px 12px;
+            cursor: pointer;
+            top: 15px;
+        }
+        .bin{
+          width: 30px;
+          height: 30px;
+        }
+        footer {
+            position: fixed; 
+            bottom: 0; 
+            width: 100%; 
+            background-color: #b87742;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .foot {
+            width: 100px; 
+            height: auto; 
+            margin-right: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="menu-bar">
+            <div class="menu-icon"></div>
+            <div class="menu-icon"></div>
+            <div class="menu-icon"></div>
+            
+        </div>
+    </header>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Add your tasks here...">
+            <span class="arrow">🡣</span>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        taskInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && taskInput.value.trim() !== '') {
+                addTask(taskInput.value.trim());
+                taskInput.value = '';
+            }
+        });
+
+        function addTask(taskText) {
+            const li = document.createElement('li');
+            li.innerHTML = `<span class="task">${taskText}</span><span class="delete"><img class="bin" src="https://cdn-icons-png.flaticon.com/128/9790/9790368.png"></span>`;
+            taskList.appendChild(li);
+
+            li.querySelector('.delete').addEventListener('click', function () {
+                li.remove();
+            });
+        }
+    </script>
+    <footer>
+      <img class="foot" src="logo.png">
+    </footer>
+</body>
+
+</html>
